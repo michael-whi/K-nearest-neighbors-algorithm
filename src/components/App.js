@@ -16,6 +16,14 @@ const Header = styled.section`
     font-weight: lighter;
     padding-left: 30px;
     border-bottom: 1px solid #e0e0e0;
+
+`;
+
+const LeftPane = styled.section`
+    height: calc(100vh - 90px);
+    font-size: 45px;
+    font-weight: lighter;
+    padding: 20px;
     box-shadow: 0px 9px 8px #f7f5f5;
 `;
 
@@ -33,26 +41,22 @@ class App extends Component {
             <Row>
                 <Col span={24}>
                     <Header>
-                        test
+                        K nearest neighbour
                     </Header>
                 </Col>
             </Row>
             <Row>
                 <Col span={4}>
-
+                    <LeftPane>
+                        
+                    </LeftPane>    
                 </Col>
                 <Col span={20}>
                     <Wrapper>
                         <div className="graph-column">
-                            <h1>K nearest neighbour</h1>
-                            <div style={{ fontSize: 20 }}>
-
-                            </div>
                             <Graph
                                 data={data}
                             />
-                        </div>
-                        <div className="research-column">
                         </div>
                     </Wrapper>
                 </Col>
