@@ -25,7 +25,7 @@ const LeftPane = styled.section`
 const Plate = styled.section`
     padding: 20px;
     box-shadow: 0px 9px 21px #dadada;
-    width: 50%;
+    width: 97%;
     margin-top: 20px;
     margin-left: 15px;
 `;
@@ -36,7 +36,7 @@ const Input = styled.input`
     border-radius: 3px;
     font-size: 15px;
     border: 1px solid #ccc;
-    width: 80%;
+    width: 90%;
 `;
 
 const Info = styled.textarea`
@@ -45,22 +45,44 @@ const Info = styled.textarea`
     border-radius: 17px;
     font-size: 15px;
     border: 1px solid #f4f4f4;
-    width: 80%;
-    height: 160px;
+    width: 90%;
+    height: auto;
     resize: none;
+`;
+
+const Button = styled.button`
+    border: none;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    margin: 16px 0 !important;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    height: auto;
+    width: 90%;
 `;
 
 class App extends Component {
 
-    state = { neighbourAmount: 5 }
+    state = {
+        neighbourAmount: 5,
+        infoText: "Make double click to create a new point."
+    }
 
-    handleNeighbourChange = (event) =>{
+    handleNeighbourChange = (event) => {
         this.setState({ neighbourAmount: event.target.value })
+    }
+
+    setInfoBoxMessage() {
+        this.setState({ infoText: "" })
     }
 
     render() {
         const data = getRandomData()
-        const { neighbourAmount } = this.state
+        const { neighbourAmount, infoText } = this.state
         return (
             <Fragment>
                 <Row>
@@ -71,20 +93,22 @@ class App extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={4} style={{ padding: '20px 20px 20px 20px' }}>
+                    <Col span={4} style={{ padding: '20px' }}>
                         <LeftPane>
                             Amount of neighbours
                             <Input
                                 value={neighbourAmount}
                                 onChange={this.handleNeighbourChange}
                             />
-                            <Info placeholder="Make double click to create a new point" />
+                            <Info placeholder={infoText} />
+                            <Button>Reset data</Button>
                         </LeftPane>
                     </Col>
                     <Col span={20}>
                         <Plate>
                             <Graph
                                 data={data}
+                                setInfoBoxMessage={this.setInfoBoxMessage}
                             />
                         </Plate>
                     </Col>

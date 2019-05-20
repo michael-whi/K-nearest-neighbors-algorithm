@@ -10,13 +10,19 @@ const getDistanceByXYSimple = (x1, y1, x2, y2) => {
 *@param {number} amount Amount of nearest points.
 *@param {array} array Array of objects with {x,y}
 */
-const getNearestNeighbours = (pointX, pointY, amount, array) => {
-    let hashTable = []
+const getNearestNeighbours = (pointX, pointY, amount, array, groupBy = null) => {
+    let neighbours = []
     array.forEach(element => {
-        hashTable.push({ x: element.x, y: element.y, distance: getDistanceByXYSimple(pointX, pointY, element.x, element.y) })
+        neighbours.push({ 
+            x: element.x, 
+            y: element.y, 
+            distance: getDistanceByXYSimple(pointX, pointY, element.x, element.y),
+            type: element.type
+        })
     })
-    hashTable = _.sortBy(hashTable, ['distance'])
-    return hashTable.slice(0, amount)
+    neighbours = _.sortBy(neighbours, ['distance'])
+    //if(groupBy) neighbours = _.groupBy(neighbours, groupBy)
+    return neighbours.slice(0, amount)
 }
 
 export {getDistanceByXYSimple, getNearestNeighbours}
