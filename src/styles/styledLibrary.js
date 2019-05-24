@@ -13,7 +13,7 @@ const LeftPane = styled.section`
     padding: 20px;
     box-shadow: 0px 9px 21px #dadada
     background: #fff;
-    height: 280px;
+    height: auto;
 `;
 
 const Plate = styled.section`
@@ -30,7 +30,7 @@ const Input = styled.input`
     border-radius: 3px;
     font-size: 15px;
     border: 1px solid #ccc;
-    width: 90%;
+    width: 95%;
 `;
 
 const Info = styled.textarea`
@@ -39,7 +39,7 @@ const Info = styled.textarea`
     border-radius: 17px;
     font-size: 15px;
     border: 1px solid #f4f4f4;
-    width: 90%;
+    width: 95%;
     height: auto;
     resize: none;
 `;
@@ -56,7 +56,8 @@ const Button = styled.button`
     font-size: 16px;
     cursor: pointer;
     height: auto;
-    width: 90%;
+    width: 95%;
+    background-color: #bad592;
 `;
 
 export { Button, Info, Input, Plate, LeftPane, Header }

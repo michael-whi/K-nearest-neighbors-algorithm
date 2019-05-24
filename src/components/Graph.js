@@ -30,6 +30,7 @@ class Graph extends Component {
 
     calculateAndUpdateData(updatedList, newPoint){
         const { data } = this.state
+        const { neighbourAmount } = this.props
         this.setState({ data: updatedList, lastPoint: newPoint }, () => {
             const dataForCalculation = []
             let updatedData
@@ -42,7 +43,7 @@ class Graph extends Component {
             const neighbourList = getNearestNeighbours(
                 newPoint.x[0], 
                 newPoint.y[0], 
-                5, 
+                neighbourAmount, 
                 dataForCalculation
             )
             const lineList = this.createLines(neighbourList, updatedList, pointIndex)
@@ -56,6 +57,7 @@ class Graph extends Component {
                     marker: { color: {$set: nearest.fruit.fill } } 
                 } 
             })
+            this.props.setInfoBoxMessage(`The new point is a ${nearest.fruit.type === 0 ? "orange" : "grapefruit"}`)
             this.setState({ data: updatedData })
         })     
     }
@@ -77,7 +79,7 @@ class Graph extends Component {
     }
 
     makeDataForGraph(){
-        const data = this.props.data.map(f => ({
+        const data = this.props.initData.map(f => ({
             "fruit": {"fill" : f.fill, "type": f.type},
             "type": "scatter",
             "mode": "markers",
@@ -92,6 +94,12 @@ class Graph extends Component {
             "text": [f.type === 0 ? "orange" : "grapefruit"]
         }))
         this.setState({ data })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.initData !== this.props.initData){
+            this.makeDataForGraph()
+        }
     }
 
     componentDidMount() {
